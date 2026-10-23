@@ -413,16 +413,81 @@
  };
 
  window.saveNewPin = function() {
- const newPin = document.getElementById('newPinInput').value.trim();
- if (!newPin || newPin.length !== 4 || isNaN(newPin)) {
- showToast("請輸入合法的 4 位數字密碼", "error");
- return;
- }
- chartData.parentPin = newPin;
- closeChangePinModal();
- saveToStorage();
- showToast("家長密碼修改成功！✨");
- };
+ function saveNewPin() {
+
+  const currentPin =
+    document.getElementById(
+      "currentPin"
+    ).value.trim();
+
+  const newPin =
+    document.getElementById(
+      "newPin"
+    ).value.trim();
+
+  const confirmPin =
+    document.getElementById(
+      "confirmPin"
+    ).value.trim();
+
+  // 驗證舊PIN
+
+  if (
+    currentPin !== chartData.parentPin
+  ) {
+
+    alert("目前PIN不正確");
+
+    return;
+  }
+
+  // 新PIN不可空白
+
+  if (!newPin) {
+
+    alert("請輸入新PIN");
+
+    return;
+  }
+
+  // 至少4位
+
+  if (newPin.length < 4) {
+
+    alert("PIN最少4位");
+
+    return;
+  }
+
+  // 兩次輸入一致
+
+  if (newPin !== confirmPin) {
+
+    alert("兩次輸入PIN不一致");
+
+    return;
+  }
+
+  chartData.parentPin = newPin;
+
+  saveToStorage();
+
+  alert("PIN已成功更新");
+document.getElementById(
+  "currentPin"
+).value = "";
+
+document.getElementById(
+  "newPin"
+).value = "";
+
+document.getElementById(
+  "confirmPin"
+).value = "";
+  
+  closeChangePinModal();
+
+
 
  function updateModeUI() {
  const modeText = document.getElementById('modeText');
