@@ -403,10 +403,25 @@
  document.getElementById('parentPinModal').classList.add('hidden');
  };
 
- window.openChangePinModal = function() {
- document.getElementById('newPinInput').value = '';
- document.getElementById('changePinModal').classList.remove('hidden');
- };
+ window.openChangePinModal = function () {
+
+  document.getElementById(
+    'currentPinInput'
+  ).value = '';
+
+  document.getElementById(
+    'newPinInput'
+  ).value = '';
+
+  document.getElementById(
+    'confirmPinInput'
+  ).value = '';
+
+  document.getElementById(
+    'changePinModal'
+  ).classList.remove('hidden');
+
+};
 
  window.closeChangePinModal = function() {
  document.getElementById('changePinModal').classList.add('hidden');
